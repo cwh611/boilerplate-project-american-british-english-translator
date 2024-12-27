@@ -1,4 +1,4 @@
-module.exports = {
+const britishOnly = {
   "abseil": "rappel",
   "accountancy": "accounting",
   "advert": "advertisement",
@@ -242,4 +242,6 @@ module.exports = {
   "wing mirrors": "side mirrors",
   "y-fronts": "briefs",
   "zebra crossing": "crosswalk"
-}
+};
+
+export default britishOnly;

@@ -1,4 +1,4 @@
-module.exports = {
+const americanToBritishSpelling = {
   "accessorize": "accessorise",
   "accessorized": "accessorised",
   "accessorizes": "accessorises",
@@ -1698,4 +1698,6 @@ module.exports = {
   "yodeling": "yodelling",
   "yogurt": "yoghurt",
   "yogurts": "yoghurts"
-}
+};
+
+export default americanToBritishSpelling;
