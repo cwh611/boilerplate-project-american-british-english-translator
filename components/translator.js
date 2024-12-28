@@ -30,7 +30,7 @@ class Translator {
                     return `<span class="highlight">${americanToBritishTitles[(word + ".").toLowerCase()].charAt(0).toUpperCase() + americanToBritishTitles[(word + ".").toLowerCase()].slice(1).toLowerCase()}</span>`;
                 } 
 
-                return word;
+                return word; 
 
             });
 
