@@ -34,7 +34,7 @@ class Translator {
 
             });
 
-            translatedString = translatedWordArray.join("").replace(/\.\s/," ").replace(/([0-9]+)(:)([0-9][0-9])/,"<span class='highlight'>$1.$3</span>");
+            translatedString = translatedWordArray.join("").replace(/\.\s/," ").replace(/([0-9]+)(:)([0-9][0-9])/,"<span class=\"highlight\">$1.$3</span>");
             console.log("translatedString:", translatedString)
 
         } else if (locale === "british-to-american") {
@@ -67,7 +67,7 @@ class Translator {
 
             });
 
-            translatedString = translatedWordArray.join("").replace(/([0-9]+)(\.)([0-9][0-9])/, "<span class='highlight'>$1:$3</span>"); // Translate time format
+            translatedString = translatedWordArray.join("").replace(/([0-9]+)(\.)([0-9][0-9])/, "<span class=\"highlight\">$1:$3</span>"); // Translate time format
 
         }
 
