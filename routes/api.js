@@ -24,13 +24,6 @@ module.exports = function (app) {
 
       const result = translator.translate(text, locale);
 
-      if (result === text) {
-        return res.json({
-          text,
-          translation: "Everything looks good to me!"
-        });
-      }
-
       return res.json({
         text,
         translation: result
