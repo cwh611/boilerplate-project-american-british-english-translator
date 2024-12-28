@@ -1,7 +1,9 @@
-import americanOnly from './american-only.js';
-import americanToBritishSpelling from './american-to-british-spelling.js';
-import americanToBritishTitles from './american-to-british-titles.js';
-import britishOnly from './british-only.js';
+'use strict';
+
+const americanOnly = require('./american-only.js');
+const americanToBritishSpelling = require('./american-to-british-spelling.js');
+const americanToBritishTitles = require('./american-to-british-titles.js');
+const britishOnly = require('./british-only.js');
 
 class Translator {
     
@@ -17,16 +19,15 @@ class Translator {
                 
                 // Check for American-to-British translation using different dictionaries
                 if (americanOnly[word.toLowerCase()])  {
-                    return `<span class="highlight">${americanOnly[word.toLowerCase()]}</span>`
+                    return `<span class="highlight">${americanOnly[word.toLowerCase()]}</span>`;
                 }
                 
                 if (americanToBritishSpelling[word.toLowerCase()]) {
-                    return `<span class="highlight">${americanToBritishSpelling[word.toLowerCase()]}</span>`
+                    return `<span class="highlight">${americanToBritishSpelling[word.toLowerCase()]}</span>`;
                 } 
                 
                 if (americanToBritishTitles[(word + ".").toLowerCase()]) {
                     return `<span class="highlight">${americanToBritishTitles[(word + ".").toLowerCase()].charAt(0).toUpperCase() + americanToBritishTitles[(word + ".").toLowerCase()].slice(1).toLowerCase()}</span>`;
-                            
                 } 
                 
                 return word;
@@ -34,17 +35,18 @@ class Translator {
             });
             
             translatedString = translatedWordArray.join("").replace(/\.\s/, " ").replace(/([0-9]+)(:)([0-9][0-9])/, "$1.$3");
-        
+            console.log("translatedString:", translatedString)
+
         } else if (locale === "british-to-american") {
            
             const translatedWordArray = wordArray.map(word => {
                 
-                // check for British-only words
+                // Check for British-only words
                 if (word === britishOnly[word.toLowerCase()]) {
-                    return `<span class="highlight">${britishOnly[word.toLowerCase()]}</span>`
+                    return `<span class="highlight">${britishOnly[word.toLowerCase()]}</span>`;
                 }
 
-                // check for British-to-American translation in spelling
+                // Check for British-to-American translation in spelling
                 const translationSpellingArray = Object.entries(americanToBritishSpelling);
                 for (let i = 0; i < translationSpellingArray.length; i++) {
                     if (word.toLowerCase() === translationSpellingArray[i][1]) {
@@ -52,7 +54,7 @@ class Translator {
                     }
                 }
 
-                // check for British-to-American translation in titles
+                // Check for British-to-American translation in titles
                 const translationTitlesArray = Object.entries(americanToBritishTitles);
                 for (let i = 0; i < translationTitlesArray.length; i++) {
                     if (word.toLowerCase() === translationTitlesArray[i][1]) {
@@ -60,17 +62,16 @@ class Translator {
                     }
                 }
 
-                return word; // if no match, return the word unchanged
+                return word; // If no match, return the word unchanged
             
             });
     
-            translatedString = translatedWordArray.join("").replace(/([0-9]+)(\.)([0-9][0-9])/, "$1:$3"); // translate date format
+            translatedString = translatedWordArray.join("").replace(/([0-9]+)(\.)([0-9][0-9])/, "$1:$3"); // Translate time format
         
         }
 
         return translatedString;
-    
     }
 }
 
-export default Translator;
+module.exports = Translator;

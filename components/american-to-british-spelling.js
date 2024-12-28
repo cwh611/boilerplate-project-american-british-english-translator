@@ -1700,4 +1700,4 @@ const americanToBritishSpelling = {
   "yogurts": "yoghurts"
 };
 
-export default americanToBritishSpelling;
+module.exports = americanToBritishSpelling;

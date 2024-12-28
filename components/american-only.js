@@ -184,4 +184,4 @@ const americanOnly = {
   "zucchini": "courgette"
 };
 
-export default americanOnly;
+module.exports = americanOnly;

@@ -244,4 +244,4 @@ const britishOnly = {
   "zebra crossing": "crosswalk"
 };
 
-export default britishOnly;
+module.exports = britishOnly;

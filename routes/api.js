@@ -1,8 +1,8 @@
 'use strict';
 
-import Translator from '../components/translator.js';
+const Translator = require('../components/translator.js');
 
-export default function (app) {
+module.exports = function (app) {
   
   const translator = new Translator();
 
@@ -36,4 +36,4 @@ export default function (app) {
         translation: result
       });
     });
-}
+};

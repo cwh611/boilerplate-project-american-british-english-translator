@@ -7,4 +7,4 @@ const americanToBritishTitles = {
   'prof.': 'prof'
 };
 
-export default americanToBritishTitles;
+module.exports = americanToBritishTitles;

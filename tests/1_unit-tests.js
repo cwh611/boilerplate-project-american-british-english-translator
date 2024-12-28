@@ -1,5 +1,9 @@
-import { assert } from 'chai';
-import Translator from '../components/translator.js';
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const { assert } = chai;
+const Translator = require('../components/translator.js');
+
+chai.use(chaiHttp);
 
 suite('Unit Tests', () => {
     
@@ -100,8 +104,6 @@ suite('Unit Tests', () => {
     test("Paracetamol takes up to an hour to work.", function () {
         console.log(translator.translate("Paracetamol takes up to an hour to work.", "british-to-american"));
     })
-
-    
 
 });
 
