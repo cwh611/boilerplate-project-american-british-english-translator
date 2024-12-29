@@ -11,7 +11,7 @@ document.getElementById("translate-btn").addEventListener("click", () => {
   })
     .then(response => response.json())
     .then(data => {
-      document.getElementById("output-container").innerHTML = JSON.stringify(data.translation.replace("\"", ""));
+      document.getElementById("output-container").innerHTML = JSON.stringify(data.translation.replace(/"/g, ""));
     })
     .catch(err => {
       alert(err)
