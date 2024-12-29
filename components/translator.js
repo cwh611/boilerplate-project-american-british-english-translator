@@ -9,65 +9,55 @@ class Translator {
 
     translate(string, locale) {
 
-        let wordArray = string.split(/(\s+|[.,!?;:(){}\[\]]+)/);
-        console.log(wordArray);
-        let translatedString = "";
+        let translatedString = string;
+        const spellingArray = Object.entries(americanToBritishSpelling);
+        const titlesArray = Object.entries(americanToBritishTitles);
+        const americanOnlyArray = Object.entries(americanOnly);
+        const britishOnlyArray = Object.entries(britishOnly);
 
         if (locale === "american-to-british") {
-
-            const translatedWordArray = wordArray.map(word => {
-
-                // Check for American-to-British translation using different dictionaries
-                if (americanOnly[word.toLowerCase()])  {
-                    return `<span class="highlight">${americanOnly[word.toLowerCase()]}</span>`;
+            
+            for (let i = 0; i < americanOnlyArray.length; i++) {
+                if (translatedString.includes(americanOnlyArray[i][0])) {
+                    translatedString = translatedString.replace(americanOnlyArray[i][0], americanOnlyArray[i][1]);
                 }
+            }
 
-                if (americanToBritishSpelling[word.toLowerCase()]) {
-                    return `<span class="highlight">${americanToBritishSpelling[word.toLowerCase()]}</span>`;
-                } 
+            for (let i = 0; i < spellingArray.length; i++) {
+                if (translatedString.includes(spellingArray[i][0])) {
+                    translatedString = translatedString.replace(spellingArray[i][0], spellingArray[i][1])
+                }
+            }
 
-                if (americanToBritishTitles[(word + ".").toLowerCase()]) {
-                    return `<span class="highlight">${americanToBritishTitles[(word + ".").toLowerCase()].charAt(0).toUpperCase() + americanToBritishTitles[(word + ".").toLowerCase()].slice(1).toLowerCase()}</span>`;
-                } 
+            for (let i = 0; i < titlesArray.length; i++) {
+                if (translatedString.includes(titlesArray[i][0])) {
+                    translatedString = translatedString.replace(titlesArray[i][0], titlesArray[i][1])
+                }
+            }
 
-                return word; 
-
-            });
-
-            translatedString = translatedWordArray.join("").replace(/\.\s/," ").replace(/([0-9]+)(:)([0-9][0-9])/,"<span class=\"highlight\">$1.$3</span>");
-            console.log("translatedString:", translatedString)
+            translatedString = translatedString.join("").replace(/([0-9]+)(:)([0-9][0-9])/, "<span class=\"highlight\">$1.$3</span>"); // Translate time format
 
         } else if (locale === "british-to-american") {
 
-            const translatedWordArray = wordArray.map(word => {
-
-                // Check for British-only words
-                if (britishOnly[word.toLowerCase()]) {
-                    console.log("British word found:", britishOnly[word.toLowerCase()])
-                    return `<span class="highlight">${britishOnly[word.toLowerCase()]}</span>`;
+            for (let i = 0; i < britishOnlyArray.length; i++) {
+                if (translatedString.includes(britishOnlyArray[i][0])) {
+                    translatedString.replace(britishOnlyArray[i][0], britishOnlyArray[i][1])
                 }
+            }
 
-                // Check for British-to-American translation in spelling
-                const translationSpellingArray = Object.entries(americanToBritishSpelling);
-                for (let i = 0; i < translationSpellingArray.length; i++) {
-                    if (word.toLowerCase() === translationSpellingArray[i][1]) {
-                        return `<span class="highlight">${translationSpellingArray[i][0]}</span>`;
-                    }
+            for (let i = 0; i < spellingArray.length; i++) {
+                if (translatedString.includes(spellingArray[i][1])) {
+                    translatedString.replace(spellingArray[i][1], spellingArray[i][0])
                 }
+            }
 
-                // Check for British-to-American translation in titles
-                const translationTitlesArray = Object.entries(americanToBritishTitles);
-                for (let i = 0; i < translationTitlesArray.length; i++) {
-                    if (word.toLowerCase() === translationTitlesArray[i][1]) {
-                        return `<span class="highlight">${translationTitlesArray[i][0].charAt(0).toUpperCase() + translationTitlesArray[i][0].slice(1).toLowerCase()}</span>`;
-                    }
+            for (let i = 0; i < titlesArray.length; i++) {
+                if (translatedString.includes(titlesArray[i][1])) {
+                    translatedString.replace(titlesArray[i][1], titlesArray[i][0])
                 }
+            }
 
-                return word; // If no match, return the word unchanged
-
-            });
-
-            translatedString = translatedWordArray.join("").replace(/([0-9]+)(\.)([0-9][0-9])/, "<span class=\"highlight\">$1:$3</span>"); // Translate time format
+            translatedString = translatedString.replace(/([0-9]+)(\.)([0-9][0-9])/, "<span class=\"highlight\">$1:$3</span>"); // Translate time format
 
         }
 
