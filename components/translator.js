@@ -35,6 +35,12 @@ class Translator {
                 }
             }
 
+            for (let i = 0; i < britishOnlyArray.length; i++) {
+                if (translatedString.includes(britishOnlyArray[i][1])) {
+                    translatedString = translatedString.replace(britishOnlyArray[i][1], britishOnlyArray[i][0])
+                }
+            }
+
             translatedString = translatedString.replace(/([0-9]+)(:)([0-9][0-9])/, "<span class=\"highlight\">$1.$3</span>"); // Translate time format
 
         } else if (locale === "british-to-american") {
@@ -54,6 +60,12 @@ class Translator {
             for (let i = 0; i < titlesArray.length; i++) {
                 if (translatedString.includes(titlesArray[i][1])) {
                     translatedString = translatedString.replace(titlesArray[i][1], titlesArray[i][0])
+                }
+            }
+
+            for (let i = 0; i < americanOnlyArray.length; i++) {
+                if (translatedString.includes(americanOnlyArray[i][1])) {
+                    translatedString = translatedString.replace(americanOnlyArray[i][1], americanOnlyArray[i][0])
                 }
             }
 
