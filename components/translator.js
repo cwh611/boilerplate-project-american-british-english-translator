@@ -35,25 +35,25 @@ class Translator {
                 }
             }
 
-            translatedString = translatedString.join("").replace(/([0-9]+)(:)([0-9][0-9])/, "<span class=\"highlight\">$1.$3</span>"); // Translate time format
+            translatedString = translatedString.replace(/([0-9]+)(:)([0-9][0-9])/, "<span class=\"highlight\">$1.$3</span>"); // Translate time format
 
         } else if (locale === "british-to-american") {
 
             for (let i = 0; i < britishOnlyArray.length; i++) {
                 if (translatedString.includes(britishOnlyArray[i][0])) {
-                    translatedString.replace(britishOnlyArray[i][0], britishOnlyArray[i][1])
+                    translatedString = translatedString.replace(britishOnlyArray[i][0], britishOnlyArray[i][1])
                 }
             }
 
             for (let i = 0; i < spellingArray.length; i++) {
                 if (translatedString.includes(spellingArray[i][1])) {
-                    translatedString.replace(spellingArray[i][1], spellingArray[i][0])
+                    translatedString = translatedString.replace(spellingArray[i][1], spellingArray[i][0])
                 }
             }
 
             for (let i = 0; i < titlesArray.length; i++) {
                 if (translatedString.includes(titlesArray[i][1])) {
-                    translatedString.replace(titlesArray[i][1], titlesArray[i][0])
+                    translatedString = translatedString.replace(titlesArray[i][1], titlesArray[i][0])
                 }
             }
 
